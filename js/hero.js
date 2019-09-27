@@ -141,7 +141,7 @@ function init() {
           e.receiveShadow = true;
 
           e.material.color = new THREE.Color(0.4, 0.4, 0.4);
-          e.material.metalness = 0.5;
+          e.material.metalness = 0.4;
           e.material.roughness = 1;
           e.material.emissive = new THREE.Color(0.1, 0.1, 0.1);
 

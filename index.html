@@ -8,21 +8,31 @@
 <script src="js/GLTFLoader.js"></script>
 <script src="js/hero.js"></script>
 <style>
+@keyframes float {
+  0% {
+    transform: translateY(-20px);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-20px);
+  }
+}
 * { 
   box-sizing: border-box;
 }
 body {
   width: 100vw;
-  height: 100vh;
   margin: 0;
   font-family: 'Open Sans';
   // font-family: 'Lato';
   // font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
   font-size: 12px;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 header {
-  position: absolute;
+  position: fixed;
   display: flex;
   top: 0;
   left: 0;
@@ -64,51 +74,79 @@ header > .login-form {
   display: flex;
   margin-left: auto;
 }
-.body {
+footer {
+  position: absolute;
   display: flex;
+  flex-direction: column;
+  color: #FFF;
   justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  bottom: 0;
+  right: 360px;
+}
+footer i {
+  margin: 10px 0;
+}
+.body {
+  position: relative;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+}
+.body.dark {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.cover {
+  position: absolute;
+  width: 50%;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #00000080;
 }
 .hero-canvas {
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 .hero {
   display: flex;
   position: relative;
   width: 800px;
-  margin-top: 100px;
+  margin: auto 0;
 }
 .hero .wrap {
   position: relative;
   width: 50%;
   margin-right: 20px;
   padding: 20px;
-  background-color: rgba(0, 0, 0, 0.5);
+  /* background-color: rgba(0, 0, 0, 0.5); */
   border-radius: 8px;
 }
-.hero .wrap h1,
-.hero .wrap p {
+.wrap h1,
+.wrap p {
   margin: 0;
   color: #FFF;
 }
-.hero .wrap h1 {
-  font-size: 3.5rem;
+.wrap h1 {
+  font-size: 3rem;
   line-height: 1.25;
   text-transform: uppercase;
 }
-.hero .wrap p {
+.wrap p {
   display: flex;
-  // margin: 15px 0;
   flex-direction: column;
-  /* color: #706c64; */
   color: #ffffffc0;
   font-size: 1.25rem;
   line-height: 1.5;
   font-weight: 400;
 }
-.hero .wrap input[type=text],
-.hero .wrap input[type=button] {
+.wrap input[type=text],
+.wrap input[type=button] {
   padding: 10px;
   border: 0;
   border-radius: 8px;
@@ -117,17 +155,17 @@ header > .login-form {
   line-height: 1.6;
   outline: none;
 }
-.hero .wrap input[type=text] {
+.wrap input[type=text] {
   width: 100%;
   background-color: #FFF;
 }
-.hero .wrap input[type=button] {
+.wrap input[type=button] {
   margin-top: 10px;
   background-color: #ef5350;
   color: #FFF;
   font-size: 13px;
 }
-.hero .wrap input[type=button]:hover {
+.wrap input[type=button]:hover {
   background-color: #ef5350;
 }
 .hero .tag {
@@ -138,6 +176,8 @@ header > .login-form {
   background-color: #FFF;
   border-radius: 8px;
   margin-top: auto;
+  /* animation: float 3s infinite;
+  animation-timing-function: ease-in-out; */
 }
 .hero .tag::before {
   position: absolute;
@@ -171,20 +211,141 @@ header > .login-form {
   /* justify-content: center; */
   align-items: center;
 }
-.hero .tag .subwrap .sponsor-button {
+a.button {
   display: inline-block;
-  margin-top: 10px;
-  padding: 2px 5px;
+  padding: 5px 10px;
   border: 2px solid;
   border-radius: 8px;
   color: #5c6bc0;
   text-transform: uppercase;
   text-decoration: none;
 }
-.hero .tag .subwrap .sponsor-button:hover {
+a.button:hover {
   background-color: #5c6bc0;
   border-color: #5c6bc0;
   color: #FFF;
+}
+.explainer {
+  display: flex;
+  width: 800px;
+  margin: auto 0;
+}
+.explainer .wrap {
+  position: relative;
+  width: 50%;
+  margin-right: 40px;
+  padding: 20px;
+  color: #FFF;
+}
+.explainer .license {
+  position: relative;
+  width: 40%;
+  padding: 10px 40px;
+  background-color: #f2f3f5;
+  border-radius: 8px;
+}
+.explainer .license > i {
+  position: absolute;
+  background-color: #5c6bc0;
+  border-radius: 100px;
+  color: #FFF;
+  top: -25px;
+  left: -25px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
+.explainer .license ul {
+  padding: 0;
+  list-style-type: none;
+}
+.explainer .license ul li {
+  display: flex;
+  margin: 20px -40px;
+  font-size: 13px;
+}
+.explainer .license ul li i {
+  width: 40px;
+  font-size: 16px;
+  color: #5c6bc0;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.explainer .license ul li span {
+  flex: 1;
+}
+.explainer .license .button {
+  margin-top: 10px;
+}
+.onboarding {
+  position: relative;
+  width: 800px;
+}
+.onboarding h1 {
+  margin-bottom: 20px;
+}
+.onboarding p {
+  display: flex;
+  position: relative;
+  padding: 10px;
+  background-color: #FFF;
+  color: #000;
+  font-size: 14px;
+  align-items: center;
+  flex-direction: row;
+}
+.onboarding p .number {
+  display: flex;
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  left: 0;
+  width: 40px;
+  margin-right: 10px;
+  background-color: #000;
+  color: #FFF;
+  justify-content: center;
+  align-items: center;
+}
+.onboarding p.first {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+.onboarding p.middle {
+  border-top: 2px solid #EEE;
+  border-bottom: 2px solid #EEE;
+}
+.onboarding p.last {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.onboarding p.first .number {
+  border-top-left-radius: 8px;
+}
+.onboarding p.last .number {
+  border-bottom-left-radius: 8px;
+}
+.onboarding p .text {
+  margin-left: 40px;
+  margin-right: auto;
+}
+a.button2 {
+  display: flex;
+  width: 140px;
+  padding: 5px 10px;
+  background-color: #66bb6a;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  color: #FFF;
+  text-decoration: none;
+  justify-content: center;
+}
+a.button2:hover {
+  background-color: #43a047;
 }
 </style>
 </head>
@@ -196,13 +357,17 @@ header > .login-form {
   <a href="/" class="nav" id="explore-dropdown">Exoland</a>
   <!-- <a class="nav" id="controls-dropdown">Controls</a> -->
 </header>
+<canvas id=hero-canvas class=hero-canvas></canvas>
 <div class=body>
-  <canvas id=hero-canvas class=hero-canvas></canvas>
+  <div class=cover>
+    <footer>
+      <i class="fal fa-chevron-down"></i>
+    </footer>
+  </div>
   <div class=hero>
     <div class=wrap>
-      <h1>Let's merge worlds</h1>
-      <p>We're making a meta virtual world.</p>
-      <p>Enter any WebVXR URL to merge your world and get sponsored.</p>
+      <h1>Funding for worlds</h1>
+      <p>Get sponsored to build your WebXR world. Enter the URL, set up Stripe, and that's it.<br>Use your favorite engine and tools.</p>
       <input type=button value="Apply for sponsorship">
       <!-- <p>Works with every browser, headset, and engine (THREE.js, A-Frame, Babylon.js, JanusWeb).</p> -->
     </div>
@@ -210,11 +375,43 @@ header > .login-form {
       <img src="avaer.jpg">
       <div class=subwrap>
         <p><strong>avaer</strong> pushed <strong>Forest01.html</strong></p>
-        <p class=align><i class="fas fa-heart-circle"></i> <strong>5</strong> Subscribers</p>
+        <p class=align><i class="fas fa-heart-circle"></i> <strong>43,722</strong> Views</p>
         <p class=align><i class="fas fa-money-check-edit-alt"></i> <strong>$210</strong> per month</p>
-        <a href="#" class=sponsor-button>Sponsor <strong>@avaer</strong></a>
+        <!-- <a href="#" class=button>Sponsor <strong>@avaer</strong></a> -->
       </div>
       <!-- <img src="hero.jpg"> -->
+    </div>
+  </div>
+</div>
+<div class=body>
+  <div class=cover></div>
+  <div class=explainer>
+    <div class=wrap>
+      <h1>How it works</h1>
+      <p>We use magical technology to merge your WebXR world into Exoland.</p>
+      <p>We pay you a sponsorship based on views.</p>
+      <p>In exchange, you agree to the Sponsored Creator License.</p>
+    </div>
+    <div class=license>
+      <i class="fal fa-file-certificate"></i>
+      <h1>Sponsored<br/>Creator License</h1>
+      <ul>
+        <li><i class="fas fa-money-check"></i><span>We pay to use your world, based on popularity.</span></li>
+        <li><i class="fas fa-shield-check"></i><span>You keep ownership, but agree not to host anywhere else.</span></li>
+        <li><i class="fas fa-heart-circle"></i><span>Open source and remixing allowed.</span></li>
+      </ul>
+      <p><a href=# class=button>Read full text</a></p>
+    </div>
+  </div>
+</div>
+<div class=body>
+  <div class=cover></div>
+  <div class=wrap>
+    <div class=onboarding>
+      <h1>Get started</h1>
+      <p class=first><span class=number>1</span><span class=text>Open a Github issue with your WebXR world URL.</span><a href=# class=button2>Add World</a></p>
+      <p class=middle><span class=number>2</span><span class=text>Onboard your account with Sponsored Creator License and Stripe Connect.</span><a href=# class=button2>Onboard Account</a></p>
+      <p class=last><span class=number>3</span><span class=text>Enjoy being sponsored for building your WebXR world.</span><a href=# class=button2>Check Payouts</a></p>
     </div>
   </div>
 </div>
