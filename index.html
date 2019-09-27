@@ -147,7 +147,7 @@ footer i {
 }
 .wrap input[type=text],
 .wrap input[type=button] {
-  padding: 10px;
+  padding: 5px 10px;
   border: 0;
   border-radius: 8px;
   font-family: inherit;
@@ -160,10 +160,10 @@ footer i {
   background-color: #FFF;
 }
 .wrap input[type=button] {
-  margin-top: 10px;
+  margin-top: 20px;
   background-color: #ef5350;
   color: #FFF;
-  font-size: 13px;
+  font-size: 16px;
 }
 .wrap input[type=button]:hover {
   background-color: #ef5350;
@@ -368,7 +368,7 @@ a.button2:hover {
     <div class=wrap>
       <h1>Funding for worlds</h1>
       <p>Get sponsored to build your WebXR world. Enter the URL, set up Stripe, and that's it.<br>Use your favorite engine and tools.</p>
-      <input type=button value="Apply for sponsorship">
+      <input type=button value="Get started">
       <!-- <p>Works with every browser, headset, and engine (THREE.js, A-Frame, Babylon.js, JanusWeb).</p> -->
     </div>
     <div class=tag>
@@ -415,5 +415,21 @@ a.button2:hover {
     </div>
   </div>
 </div>
+<!-- <script>
+  console.log('got script');
+  const heroCanvas = document.getElementById('hero-canvas');
+  window.addEventListener('scroll', () => {
+    console.log('scroll');
+    heroCanvas.style.top = window.document.scrollingElement.scrollTop + 'px';
+  });
+  window.document.addEventListener('scroll', () => {
+    console.log('scroll', window.document.scrollingElement.scrollTop);
+    heroCanvas.style.top = window.document.scrollingElement.scrollTop + 'px';
+  });
+  window.document.body.addEventListener('scroll', () => {
+    console.log('scroll', window.document.scrollingElement.scrollTop);
+    heroCanvas.style.top = window.document.scrollingElement.scrollTop + 'px';
+  });
+</script> -->
 </body>
 </html>
