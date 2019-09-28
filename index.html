@@ -69,9 +69,82 @@ header .nav i {
   padding: 0 7px;
   padding-top: 2px;
 }
+header > .account-form {
+  display: flex;
+  margin-left: auto;
+  margin-right: 30px;
+}
+header > .account-form .user-button {
+  display: flex;
+  height: 30px;
+  padding: 3px 10px;
+  background-color: #f2f3f5;
+  border-radius: 8px;
+  align-items: center;
+  cursor: pointer;
+}
+header > .account-form .user-button:hover,
+header > .account-form .user-button.open {
+  background-color: #CCC;
+}
+header > .account-form .user-button > img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+header > .account-form .user-button > .name {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
 header > .login-form {
   display: flex;
   margin-left: auto;
+}
+.user-account {
+  position: relative;
+  top: 50px;
+  display: flex;
+  width: 100%;
+  height: 300px;
+  padding: 30px;
+  background-color: #FFF;
+  flex-direction: column;
+  z-index: 1;
+}
+.user-account:not(.open) {
+  display: none;
+}
+.user-account .row {
+  display: flex;
+  margin: 5px 0;
+  align-items: center;
+}
+.user-account .text {
+  margin-right: 5px;
+}
+.user-account .status {
+  padding: 3px 6px;
+  background-color: #5c6bc0;
+  border-radius: 8px;
+  color: #FFF;
+}
+.user-account input[type=text] {
+  width: 300px;
+  padding: 10px;
+  background-color: #f2f3f5;
+  border: 0;
+  border-radius: 8px;
+}
+.user-account input[type=button] {
+  display: flex;
+  margin-left: auto;
+  padding: 5px 10px;
+  background-color: #66bb6a;
+  border: 0;
+  border-radius: 8px;
+  color: #FFF;
+  cursor: pointer;
 }
 footer {
   position: absolute;
@@ -355,7 +428,25 @@ a.button2:hover {
   </a>
   <a href="/" class="nav" id="explore-dropdown">Exoland</a>
   <!-- <a class="nav" id="controls-dropdown">Controls</a> -->
+  <form class=account-form id=account-form>
+    <nav class=user-button id=user-button>
+      <img src="avaer.jpg">
+      <span class=name>a@modules.io</span>
+    </nav>
+  </form>
 </header>
+<div class=user-account id=user-account>
+  <h1>Avaer Kazmer</h1>
+  <div class=row>
+    <input type=text placeholder="Enter WebXR URL" id=site-url-bar>
+    <input type=button value="Submit Site" id=submit-site>
+  </div>
+  <div class=row>
+    <div class=text>Stripe status:</div>
+    <div class=status>Not connected</div>
+    <input type=button value="Connect Stripe" id=connect-stripe-button>
+  </div>
+</div>
 <canvas id=hero-canvas class=hero-canvas></canvas>
 <div class=body>
   <div class=cover>
@@ -382,7 +473,7 @@ a.button2:hover {
     </div>
   </div>
 </div>
-<div class=body>
+<!-- <div class=body>
   <div class=cover></div>
   <div class=explainer>
     <div class=wrap>
@@ -402,7 +493,7 @@ a.button2:hover {
       <p><a href=# class=button>Read full text</a></p>
     </div>
   </div>
-</div>
+</div> -->
 <div class=body>
   <div class=cover></div>
   <div class=wrap>
@@ -414,6 +505,25 @@ a.button2:hover {
     </div>
   </div>
 </div>
+<script>
+  const submitSiteUrlBar = document.getElementById('site-url-bar');
+  const submitSiteButton = document.getElementById('submit-site');
+  submitSiteButton.addEventListener('click', () => {
+    window.location.href = `https://github.com/exokitxr/exoland/issues/new?title=${encodeURIComponent('URL add request')}&assignee=modulesio&body=${encodeURIComponent('URL to add:\n\n```' + submitSiteUrlBar.value + '```')}`;
+  });
+  const connectStripeButton = document.getElementById('connect-stripe-button');
+  connectStripeButton.addEventListener('click', () => {
+    window.location.href = 'http://payments.exokit.org/authorize';
+  });
+
+  const userButton = document.getElementById('user-button');
+  const userAccount = document.getElementById('user-account');
+  userButton.addEventListener('click', () => {
+    console.log('got click');
+    userButton.classList.toggle('open');
+    userAccount.classList.toggle('open');
+  });
+</script>
 <!-- <script>
   console.log('got script');
   const heroCanvas = document.getElementById('hero-canvas');

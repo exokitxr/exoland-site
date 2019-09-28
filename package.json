@@ -1,7 +1,7 @@
 {
-  "name": "exokit-interlink",
+  "name": "exoland",
   "version": "0.0.1",
-  "description": "Exokit Interlink",
+  "description": "Exoland",
   "main": "index.js",
   "dependencies": {
     "express": "^4.17.1"
