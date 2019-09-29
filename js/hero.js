@@ -127,15 +127,11 @@ function init() {
 
   summerMesh = (() => {
     const object = new THREE.Object3D();
-    /* object.basePosition = new THREE.Vector3(-1, 0, -1);
-    object.nextUpdateTime = 0;
-    object.exobotMeshes = []; */
 
     const loader = new THREE.GLTFLoader()//.setPath( 'models/' );
     loader.load( 'summer.glb', function ( o ) {
 
       o = o.scene;
-      window.s = o;
       o.traverse(e => {
         if (e.isMesh) {
           e.receiveShadow = true;
